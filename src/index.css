@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "Martian-mono", monospace;
+    src: url("../../public/fonts/MartianMono.ttf");
+}
+
+body {
+    margin: 0;
+    font-family: "Martian-mono";
+}
