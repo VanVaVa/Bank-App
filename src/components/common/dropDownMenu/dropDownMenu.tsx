@@ -16,29 +16,13 @@ export const DropDownMenu: React.FC<DropDownMenuProps> = ({ options, accent = fa
     const[opened, setOpened] = useState(false);
     const[currentValue, setCurrentValue] = useState(defaultValue);
 
-    // const widthRef = useRef<HTMLButtonElement | null>(null);
-    // const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-
-    // useLayoutEffect(() => {
-    //     calculateWidth();
-    // }, [])
-
-    // const calculateWidth = () => {
-    //     if (widthRef.current) {
-    //         const { width, height } = widthRef.current.getBoundingClientRect();
-    //         setDimensions(() => {
-    //             return({ width, height });
-    //         });
-    //         console.log("changed!");
-    //     }
-    // }
-
     const listOptions = options.map((option: string) => 
         <li className="dropdown_element"
             key={option}
         >
             <DropDownElement $accent={accent}
                              onClick={() => choose(option)}
+                             type="button"
             >
                 {option}
             </DropDownElement>
@@ -57,7 +41,6 @@ export const DropDownMenu: React.FC<DropDownMenuProps> = ({ options, accent = fa
     }
 
     const choose = (value: string) => {
-        // calculateWidth();
         setCurrentValue(value);
         setOpened(false);
     }
@@ -68,14 +51,13 @@ export const DropDownMenu: React.FC<DropDownMenuProps> = ({ options, accent = fa
                 <DropDownElement    onClick={toggleMenu}
                                     $accent={accent}
                                     $label={true}
-                                    // ref={widthRef}
+                                    type="button"
                 >
                     {currentValue}
                     <img src="../../../../icons/down_arrow.svg" style={imgStyle} ></img>
                 </DropDownElement>
                 <DropdownList $displayed={opened}
                               $accent={accent}
-                            //   $dimensions={dimensions}
                 >
                     {listOptions}
                 </DropdownList>
@@ -98,7 +80,7 @@ const DropdownList = styled.ul<{ $displayed: boolean, $accent: boolean,}>`
     position: absolute;
     display: ${props => props.$displayed ? "grid" : "none"};
 
-    z-index: -1;
+    z-index: 1;
     margin-top: 60px;
     padding: 0px 29px 11px 29px;
 
