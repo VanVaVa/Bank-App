@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-import { colors, font } from '../../../styles/constants'
+import { font } from '../../../styles/constants'
 
 export const StyledButton = styled.button`
-    background-color: ${colors.accent};
-    color: white;
+    background-color: ${props => props.theme.accent};
+    color: ${props => props.theme.light};
     font-size: ${font.size};
 
     border: none;
@@ -13,6 +13,6 @@ export const StyledButton = styled.button`
     padding: 11px 29px;
 
     &:hover {
-        background-color: ${colors.accentDark}
+        background-color: ${props => props.theme.accentDark}
     }
 `;

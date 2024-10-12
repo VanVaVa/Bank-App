@@ -1,23 +1,21 @@
+import React from "react";
 import { useState } from "react";
 import "./themeSwitcher.css"
-
-import { colors } from "../../styles/constants"
-
+import styled from "styled-components";
 
 const labelStyle = {
-    cursor: "pointer",
-    display: "inline-block",
-    width: "100%",
-    height: "100%",
-    backgroundColor: colors.shade,
-    borderRadius: "30px",
+    
 }
 
 const iconStyle = {
     margin: "10px 10px",
 }
 
-export function ThemeSwitcher() {
+type switcherProps = {
+    onSwitch: () => void,
+}
+
+export const ThemeSwitcher: React.FC<switcherProps> = ({ onSwitch }) => {
     const iconLight: string = "../../../../icons/icon_light.svg";
     const iconDark: string = "../../../../icons/icon_dark.svg";
 
@@ -26,8 +24,11 @@ export function ThemeSwitcher() {
 
     const handleToggle = () => {
         setIsToggled(!isToggled);
-        if (icon === iconLight) setIcon(iconDark)
-        else setIcon(iconLight);
+        if (icon === iconLight) {
+            setIcon(iconDark)
+        } else {
+            setIcon(iconLight);
+        } 
     };
 
     return (
@@ -35,15 +36,27 @@ export function ThemeSwitcher() {
             <input
                 type="checkbox"
                 checked={isToggled}
-                onChange={handleToggle}
+                onChange={() => {
+                    handleToggle()
+                    onSwitch()
+                }}
                 id="toggle"
                 className="toggle-input"
             />
-            <label htmlFor="toggle" className="toggle-label" style={labelStyle}>
+            <Label htmlFor="toggle" className="toggle-label" style={labelStyle}>
                 <span className="toggle-button">
                     <img src={icon} style={iconStyle}/>
                 </span>
-            </label>
+            </Label>
         </div>
     );
 }
+
+const Label = styled.label`
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: ${props => props.theme.shade};
+    border-radius: 30px;
+`

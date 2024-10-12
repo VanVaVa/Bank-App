@@ -4,33 +4,39 @@ import { Gridbox } from './common/gridbox/gridBox';
 import { FlexBox } from './common/flexBox/flexBox';
 
 import styled from "styled-components"
-
-import { colors } from '../styles/constants';
+import React from 'react';
 
 const formStyle = {
     marginBlock: "27px",
-}
-
-const profitStyle = {
-    marginLeft: "29px",
 }
 
 const profitBoxStyle = {
     marginTop: "40px",
 }
 
-export function Card() {
+type cardProps = {
+    id: string,
+    onRemove: (id: string) => void,
+}
+
+export const Card: React.FC<cardProps> = ({ id, onRemove }) => {
+
+    const remover = () => {
+        onRemove(id)
+    }
+
     return (
         <CardWrapper>
             <form>
                 <FlexBox $justifyContent='space-between'>
-                    <DepositName placeholder='Имя вклада'></DepositName>
-                    <button type="button">
-                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="24" cy="24" r="22" stroke="#DBDEF0" stroke-width="4"/>
-                        <rect x="11.9791" y="33.1924" width="30" height="4" transform="rotate(-45 11.9791 33.1924)" fill="#DBDEF0"/>
-                        <rect x="33.1924" y="36.0208" width="30" height="4" transform="rotate(-135 33.1924 36.0208)" fill="#DBDEF0"/>
+                    <DepositName placeholder={id}></DepositName>
+                    <button type="button" onClick={remover}>
+                    <svg width="48" height="51" viewBox="0 0 48 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect y="10" width="48" height="9" fill="#E27277"/>
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M43 15H5V51H43V15ZM35 18H13V43H35V18Z" fill="#E27277"/>
+                        <path d="M34 10C34 7.34784 32.9464 4.8043 31.0711 2.92893C29.1957 1.05357 26.6522 2.00233e-07 24 0C21.3478 -2.00233e-07 18.8043 1.05357 16.9289 2.92893C15.0536 4.80429 14 7.34783 14 10L24 10H34Z" fill="#E27277"/>
                     </svg>
+
                     </button>
                 </FlexBox>
                 <Gridbox $rows={3} $gap={34} style={formStyle}>
@@ -68,7 +74,7 @@ export function Card() {
             </form>
                 <Gridbox $columns={2} style={profitBoxStyle}>
                     <Label>Доход:</Label>
-                    <h2 style={profitStyle}>0 руб</h2>
+                    <DepositResult>0 руб</DepositResult>
                 </Gridbox>
 
         </CardWrapper>
@@ -78,23 +84,30 @@ export function Card() {
 const CardWrapper = styled.div`
     padding: 41px;
     border-radius: 30px;
-    background-color: white;
-    filter: drop-shadow(0 0 10px grey);
+    background-color: ${props => props.theme.light};
+    filter: drop-shadow(0 0 8px black);
     max-width: 648px;
-    margin: 73px 55px
+    margin-right: 55px;
 `;
 
 const Label = styled.span<{ padding_left?: number }>`
     padding-left: ${props => props.padding_left}px;
+    color: ${props => props.theme.dark}
 `;
 
 const DepositName = styled.input`
     background-color: transparent;
     font-size: 48px;
-    color: ${colors.dark};
+    color: ${props => props.theme.dark};
     max-width: 400px;
     
     &:placeholder-shown {
-        color: ${colors.dark};
+        color: ${props => props.theme.dark};
     }
+`;
+
+const DepositResult = styled.div`
+    font-size: 48px;
+    color: ${props => props.theme.dark};
+    margin-left: 29px;
 `
