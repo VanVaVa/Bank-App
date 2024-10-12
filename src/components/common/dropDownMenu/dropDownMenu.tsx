@@ -82,7 +82,7 @@ const DropdownList = styled.ul<{ $displayed: boolean, $accent: boolean,}>`
 
     z-index: 1;
     margin-top: 60px;
-    padding: 0px 29px 11px 29px;
+    padding: 11px 29px 11px 29px;
 
     border-radius: 30px;
     filter: drop-shadow(0 13px 5px grey);
