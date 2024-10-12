@@ -1,9 +1,11 @@
 import { TextInput } from './common/textInput/textInput'
 import { DropDownMenu } from './common/dropDownMenu/dropDownMenu'
 import { Gridbox } from './common/gridbox/gridBox';
-import { FlexBox } from './flexBox/flexBox';
+import { FlexBox } from './common/flexBox/flexBox';
 
 import styled from "styled-components"
+
+import { colors } from '../styles/constants';
 
 const formStyle = {
     marginBlock: "27px",
@@ -20,8 +22,17 @@ const profitBoxStyle = {
 export function Card() {
     return (
         <CardWrapper>
-            <DepositName placeholder='Имя вклада'></DepositName>
             <form>
+                <FlexBox $justifyContent='space-between'>
+                    <DepositName placeholder='Имя вклада'></DepositName>
+                    <button type="button">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="24" cy="24" r="22" stroke="#DBDEF0" stroke-width="4"/>
+                        <rect x="11.9791" y="33.1924" width="30" height="4" transform="rotate(-45 11.9791 33.1924)" fill="#DBDEF0"/>
+                        <rect x="33.1924" y="36.0208" width="30" height="4" transform="rotate(-135 33.1924 36.0208)" fill="#DBDEF0"/>
+                    </svg>
+                    </button>
+                </FlexBox>
                 <Gridbox $rows={3} $gap={34} style={formStyle}>
                     <div>
                         <TextInput placeholder='Сумма'></TextInput>
@@ -80,4 +91,10 @@ const Label = styled.span<{ padding_left?: number }>`
 const DepositName = styled.input`
     background-color: transparent;
     font-size: 48px;
+    color: ${colors.dark};
+    max-width: 400px;
+    
+    &:placeholder-shown {
+        color: ${colors.dark};
+    }
 `
