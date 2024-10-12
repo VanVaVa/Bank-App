@@ -9,6 +9,10 @@ export const GlobalStyles = createGlobalStyle`
         font-size: 32px;
     }
 
+    h2 {
+        font-size: 48px;
+    }
+
 
 
     /* Reset and base styles  */
@@ -41,7 +45,7 @@ export const GlobalStyles = createGlobalStyle`
     }
 
     h1, h2, h3, h4, h5, h6, p {
-        font-size: inherit;
+        /* font-size: inherit; */
         font-weight: inherit;
     }
 
