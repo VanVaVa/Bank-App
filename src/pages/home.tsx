@@ -11,12 +11,22 @@ import { v4 as uuidv4 } from 'uuid';
 import "../styles/font_import.css"
 import { colorsDark, colorsLight } from '../styles/constants'
 import { ThemeProvider } from 'styled-components'
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 
-
+type card = {
+    id: string,
+    name?: string,
+    sum?: number,
+    currency?: string,
+    percentage?: number,
+    time?: number,
+    timeUnit?: string,
+    profitTime?: string,
+    account?: string,
+}
 
 export default function Home() {
-    const [cards, setCards] = useState<{id: string; value: ReactNode}[]>([])
+    const [cards, setCards] = useState<{id: string}[]>([])
     const [isDarkTheme, setIsDarkTheme] = useState(false);
     
     const toggleTheme = () => {
@@ -24,27 +34,14 @@ export default function Home() {
     }
 
     const addCard = () => {
-        const tempId = uuidv4()
-        const newCard = {
-            id: tempId,
-            value: <li><Card id={tempId} onRemove={removeCard}/></li>,
-        }
+        const newCard: card = {
+            id: uuidv4()
+            
+                }
         setCards([...cards, newCard])
     }
-
-    const setItems = () => {
-        if (cards.length !== 0) {
-            return (
-                <CardList>
-                    {cards.map(card => card.value)}
-                </CardList>
-            )
-        } else {
-            return <EmptyList>Здесь будут ваши вклады</EmptyList>
-        }
-    }
-
     const removeCard = (id: string) => {
+        console.log(cards)
         setCards(prev => prev.filter(el => el.id !== id))
     };
 
@@ -61,7 +58,10 @@ export default function Home() {
                     </FlexBox>
                 </Header>
                 <StyledPageBody>
-                        {setItems()}
+                {!!cards.length && <CardList>
+                    {cards.map(card => <li><Card key={card.id} id={card.id} onRemove={removeCard}/></li>)}
+                </CardList>}
+                {!cards.length && <EmptyList>Здесь будут ваши вклады</EmptyList>}
                 </StyledPageBody>
                 <StyledFooter>
 
@@ -97,6 +97,6 @@ const EmptyList = styled.span`
     margin: auto;
     font-size: 96px;
     color: ${props => props.theme.shade}
-`
+`;
 
   

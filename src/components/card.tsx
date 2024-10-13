@@ -29,7 +29,7 @@ export const Card: React.FC<cardProps> = ({ id, onRemove }) => {
         <CardWrapper>
             <form>
                 <FlexBox $justifyContent='space-between'>
-                    <DepositName placeholder={id}></DepositName>
+                    <DepositName placeholder="Новый вклад"></DepositName>
                     <button type="button" onClick={remover}>
                     <svg width="48" height="51" viewBox="0 0 48 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect y="10" width="48" height="9" fill="#E27277"/>
@@ -45,7 +45,7 @@ export const Card: React.FC<cardProps> = ({ id, onRemove }) => {
                         <DropDownMenu options={["руб", "usd"]} defaultValue='руб'></DropDownMenu>
                     </div>
                     <div>
-                        <TextInput placeholder='Ставка'  width={198}></TextInput>
+                        <TextInput placeholder='Ставка' width={198}></TextInput>
                         <Label padding_left={29}>%</Label>
                     </div>
                     <div>
